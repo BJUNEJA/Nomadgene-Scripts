@@ -1,1 +1,1 @@
-# This repository is just a small assortment of scripts written for different consulting assignments. I realize I need to organize this better . For now just getting started to create a centralized space for scripts , otherwise scattered all over. 
+# This repository is just a small assortment of scripts written for different consulting assignments done over last 1 year or so.. I realize I need to organize this better . For now just getting started to create a centralized space for scripts. 
