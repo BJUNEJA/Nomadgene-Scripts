@@ -1,0 +1,337 @@
+bplist00Ñ_WebMainResourceÕ	
+_WebResourceMIMEType_WebResourceTextEncodingName^WebResourceURL_WebResourceFrameName_WebResourceDataYtext/htmlUUTF-8_Mhttps://matlab.mathworks.com/users/mwa0000017028029/Published/hw10/index.htmlPO2æ<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>hw10</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-12-07"><meta name="DC.source" content="hw10.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">Part f obtain maximum likelihood estimates of the parameters for the data</a></li><li><a href="#2">part g Test hypothesis that coeffecients on female and marital status are 0.</a></li><li><a href="#3">part h test the hypothesis that all the coefficients in the model save for the constant</a></li></ul></div><h2 id="1">Part f obtain maximum likelihood estimates of the parameters for the data</h2><pre class="codeinput">T=readtable(<span class="string">'f7_1.csv'</span>);
+[n nn] = size(T);
+y= zeros(n,1);
+
+<span class="keyword">for</span> r = 1:n
+    <span class="keyword">if</span> T.docvis(r) &gt; 0
+        y(r,:)=1;
+    <span class="keyword">else</span>
+          y(r,:)=0;
+    <span class="keyword">end</span>;
+<span class="keyword">end</span>;
+
+[n nn]=size(y);
+X =[ones(n,1), T.age, T.educ,T.hsat, T.female,T.married];
+[n k]=size(X);
+b=inv(X'*X)*X'*y;
+
+<span class="comment">% Newton ML for logit estimates</span>
+beta0 =b;
+beta1=zeros(6,1);
+<span class="keyword">while</span> abs(max(beta1-beta0)) &gt;0.000001
+    <span class="comment">%p=1./(1+exp(-X*beta0));</span>
+    p = exp(X*beta0)./(1+exp(X*beta0));
+    g=sum(kron(ones(1,6),y-p).*X);
+    H=-((X.*kron(ones(1,6),p))'*((1-kron(ones(1,6),p)).*X));
+    beta0=beta0-inv(H)*g';
+    beta1=beta0-inv(H)*g';
+<span class="keyword">end</span>;
+
+std_l = sqrt(diag(-inv(H)));
+
+label = [
+    <span class="string">'Constant  '</span>;
+    <span class="string">'Age       '</span>;
+    <span class="string">'Educ      '</span>;
+    <span class="string">'hsat      '</span>;
+    <span class="string">'femle     '</span>;
+    <span class="string">'married   '</span>];
+
+
+
+disp(<span class="string">'MLE using Newton Raphson method'</span>);
+disp(<span class="string">'Variables  b-hat-MLE    SE'</span>);
+<span class="keyword">for</span> ii = 1:size(X,2)
+    fprintf(<span class="string">'%s%10.4f%10.4f\n'</span>,label(ii,:),beta1(ii),std_l(ii));
+<span class="keyword">end</span>
+
+<span class="comment">%  ll for MLE</span>
+ll = sum(y.*log(p) + (1-y).*log(1-p));
+fprintf(<span class="string">'%s%10.4f\n'</span>,<span class="string">"log likelihood is:"</span> ,ll);
+
+<span class="comment">% calculate pseudo r-squared</span>
+bzero = zeros(6,1);
+pz = 1./(1+exp(-X*bzero));
+llz = sum(y.*log(pz) + (1-y).*log(1-pz));
+
+r2_pseudo = 1-ll/llz;
+fprintf(<span class="string">'%s%10.4f\n'</span>,<span class="string">"pseudo-r-squared  is:"</span> ,r2_pseudo);
+</pre><pre class="codeoutput">MLE using Newton Raphson method
+Variables  b-hat-MLE    SE
+Constant      1.8221    0.1076
+Age           0.0124    0.0012
+Educ         -0.0057    0.0058
+hsat         -0.2928    0.0069
+femle         0.5838    0.0272
+married       0.0355    0.0317
+log likelihood is:-16405.9421
+pseudo-r-squared  is:    0.1338
+</pre><h2 id="2">part g Test hypothesis that coeffecients on female and marital status are 0.</h2><p>LR Test to test b-hat-female = b-hat-married =0</p><pre class="codeinput">[n nn]=size(y);
+Xu =[ones(n,1), T.age, T.educ,T.hsat];
+[nu ku]=size(Xu);
+bu=inv(Xu'*Xu)*Xu'*y;
+
+<span class="comment">% Newton ML for logit estimates</span>
+betau0 =bu;
+betau1=zeros(4,1);
+<span class="keyword">while</span> abs(max(betau1-betau0)) &gt;0.000001
+    <span class="comment">%p=1./(1+exp(-X*beta0));</span>
+    pu = exp(Xu*betau0)./(1+exp(Xu*betau0));
+    gu=sum(kron(ones(1,4),y-pu).*Xu);
+    Hu=-((Xu.*kron(ones(1,4),pu))'*((1-kron(ones(1,4),pu)).*Xu));
+    betau0=betau0-inv(Hu)*gu';
+    betau1=betau0-inv(Hu)*gu';
+<span class="keyword">end</span>;
+
+<span class="comment">%  ll for MLE - unrestricted model</span>
+llu = sum(y.*log(pu) + (1-y).*log(1-pu));
+
+lambda = ll-llu;
+lr_stat = -2*log(lambda);
+fprintf(<span class="string">'%s%10.4f\n'</span>,<span class="string">"lr-stat   is:"</span> ,lr_stat);
+crit_lr = chi2inv(0.95,1);
+<span class="keyword">if</span> lr_stat &gt; crit_lr
+        disp(<span class="string">"Reject H0"</span>);
+    <span class="keyword">else</span>
+          disp(<span class="string">"test_statistic is  -10.9078 this is way less  chi-squared 0.95,1 = 3.8415 do not reject "</span> + <span class="keyword">...</span>
+              <span class="string">"null hypothesis. "</span>);
+<span class="keyword">end</span>
+
+
+<span class="comment">% Wald Test for b-hat-female =0 and b-hat-married=0</span>
+
+R= [0,0,0,0,1,0; 0,0,0,0,0,1];
+r=[0;0];
+d = (R*beta0 - r);
+v = R*var(beta0)*R';
+w= d'*v*d;
+fprintf(<span class="string">'%s%10.4f\n'</span>,<span class="string">"Wald Statistic   is:"</span> ,w);
+crit = chi2inv(0.95,2);
+<span class="keyword">if</span> w &gt; crit
+        disp(<span class="string">"Reject H0"</span>);
+    <span class="keyword">else</span>
+          disp(<span class="string">"do not reject H0"</span>);
+<span class="keyword">end</span>
+
+<span class="comment">% LM Test - to be done later</span>
+</pre><pre class="codeoutput">lr-stat   is:  -10.9078
+test_statistic is  -10.9078 this is way less  chi-squared 0.95,1 = 3.8415 do not reject null hypothesis. 
+Wald Statistic   is:    0.2034
+do not reject H0
+</pre><h2 id="3">part h test the hypothesis that all the coefficients in the model save for the constant</h2><pre class="codeinput"><span class="comment">%term are equal to zero.</span>
+
+R1= [0,1,0,0,0,0;0,0,1,0,0,0; 0,0,0,1,0,0; 0,0,0,0,1,0; 0,0,0,0,0,1];
+r1=[0;0;0;0;0];
+d1 = (R1*beta0 - r1);
+v1 = R1*var(beta0)*R1';
+w1= d1'*v1*d1;
+fprintf(<span class="string">'%s%10.4f\n'</span>,<span class="string">"Wald Statistic for part h  is:"</span> ,w1);
+crit1 = chi2inv(0.95,5);
+<span class="keyword">if</span> w1 &gt; crit1
+        disp(<span class="string">"Reject H0"</span>);
+    <span class="keyword">else</span>
+          disp(<span class="string">"do not reject H0"</span>);
+<span class="keyword">end</span>
+</pre><pre class="codeoutput">Wald Statistic for part h  is:    0.2545
+do not reject H0
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLABÂ® R2019b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Part f obtain maximum likelihood estimates of the parameters for the data 
+T=readtable('f7_1.csv');
+[n nn] = size(T);
+y= zeros(n,1);
+
+for r = 1:n
+    if T.docvis(r) > 0 
+        y(r,:)=1; 
+    else
+          y(r,:)=0; 
+    end;
+end;
+
+[n nn]=size(y);
+X =[ones(n,1), T.age, T.educ,T.hsat, T.female,T.married];
+[n k]=size(X);
+b=inv(X'*X)*X'*y;
+
+% Newton ML for logit estimates 
+beta0 =b;
+beta1=zeros(6,1);
+while abs(max(beta1-beta0)) >0.000001
+    %p=1./(1+exp(-X*beta0));
+    p = exp(X*beta0)./(1+exp(X*beta0));
+    g=sum(kron(ones(1,6),y-p).*X);
+    H=-((X.*kron(ones(1,6),p))'*((1-kron(ones(1,6),p)).*X));
+    beta0=beta0-inv(H)*g';
+    beta1=beta0-inv(H)*g';
+end;
+
+std_l = sqrt(diag(-inv(H)));
+
+label = [
+    'Constant  ';
+    'Age       ';
+    'Educ      ';
+    'hsat      ';
+    'femle     ';
+    'married   '];
+  
+ 
+ 
+disp('MLE using Newton Raphson method'); 
+disp('Variables  b-hat-MLE    SE'); 
+for ii = 1:size(X,2)
+    fprintf('%s%10.4f%10.4f\n',label(ii,:),beta1(ii),std_l(ii));
+end 
+
+%  ll for MLE 
+ll = sum(y.*log(p) + (1-y).*log(1-p)); 
+fprintf('%s%10.4f\n',"log likelihood is:" ,ll); 
+
+% calculate pseudo r-squared 
+bzero = zeros(6,1);
+pz = 1./(1+exp(-X*bzero));
+llz = sum(y.*log(pz) + (1-y).*log(1-pz)); 
+
+r2_pseudo = 1-ll/llz; 
+fprintf('%s%10.4f\n',"pseudo-r-squared  is:" ,r2_pseudo); 
+%% part g Test hypothesis that coeffecients on female and marital status are 0. 
+% LR Test to test b-hat-female = b-hat-married =0 
+
+[n nn]=size(y);
+Xu =[ones(n,1), T.age, T.educ,T.hsat];
+[nu ku]=size(Xu);
+bu=inv(Xu'*Xu)*Xu'*y;
+
+% Newton ML for logit estimates 
+betau0 =bu;
+betau1=zeros(4,1);
+while abs(max(betau1-betau0)) >0.000001
+    %p=1./(1+exp(-X*beta0));
+    pu = exp(Xu*betau0)./(1+exp(Xu*betau0));
+    gu=sum(kron(ones(1,4),y-pu).*Xu);
+    Hu=-((Xu.*kron(ones(1,4),pu))'*((1-kron(ones(1,4),pu)).*Xu));
+    betau0=betau0-inv(Hu)*gu';
+    betau1=betau0-inv(Hu)*gu';
+end;
+
+%  ll for MLE - unrestricted model
+llu = sum(y.*log(pu) + (1-y).*log(1-pu)); 
+
+lambda = ll-llu;  
+lr_stat = -2*log(lambda);
+fprintf('%s%10.4f\n',"lr-stat   is:" ,lr_stat); 
+crit_lr = chi2inv(0.95,1);
+if lr_stat > crit_lr
+        disp("Reject H0");
+    else
+          disp("test_statistic is  -10.9078 this is way less  chi-squared 0.95,1 = 3.8415 do not reject " + ...
+              "null hypothesis. ");
+end
+
+
+% Wald Test for b-hat-female =0 and b-hat-married=0 
+
+R= [0,0,0,0,1,0; 0,0,0,0,0,1];
+r=[0;0];
+d = (R*beta0 - r);
+v = R*var(beta0)*R'; 
+w= d'*v*d; 
+fprintf('%s%10.4f\n',"Wald Statistic   is:" ,w);
+crit = chi2inv(0.95,2);
+if w > crit
+        disp("Reject H0");
+    else
+          disp("do not reject H0");
+end
+
+% LM Test - to be done later 
+
+%% part h test the hypothesis that all the coefficients in the model save for the constant
+%term are equal to zero.
+
+R1= [0,1,0,0,0,0;0,0,1,0,0,0; 0,0,0,1,0,0; 0,0,0,0,1,0; 0,0,0,0,0,1];
+r1=[0;0;0;0;0];
+d1 = (R1*beta0 - r1);
+v1 = R1*var(beta0)*R1'; 
+w1= d1'*v1*d1; 
+fprintf('%s%10.4f\n',"Wald Statistic for part h  is:" ,w1);
+crit1 = chi2inv(0.95,5);
+if w1 > crit1
+        disp("Reject H0");
+    else
+          disp("do not reject H0");
+end
+
+
+
+
+
+##### SOURCE END #####
+--></body></html>    ( > \ k ‚ ” ž ¤ ô õ                           3ß
